@@ -20,8 +20,11 @@ output01 = json.loads(data01)
 
 # after checked the dataset we only keep 'results' for analysis
 turnout = pd.DataFrame(output01["results"])
-top = (turnout.sort_values(by=['percent'], ascending=False) #check the turnout of each country from high to low
-
+turnout.head()
+#check the turnout of each country from high to low
+top = turnout.sort_values(by = "percent", ascending = False)
+top.head(15) 
+       
 #################################### 2. by municipality
 # dataset could be found in https://www.data.gouv.fr/en/datasets/elections-europeennes-2014-resultats-par-communes/
 surl02 = "https://www.data.gouv.fr/en/datasets/r/d6817473-7c6b-4a41-955c-b620c86e7fd7"
@@ -81,17 +84,11 @@ output02.to_csv('output02.csv') #save the file
 
 #store dataframe into the database
 connection = sqlite3.connect("output02.db")#create the database
-#crsr = connection.cursor() # cursor object, which lets us actually send messages to our DB and receive results
 output02.to_sql('output02', connection, if_exists='replace', index=False) #connect the dataframe with the database
-result_muni = pd.read_sql('select Code_de_la_commu  from output02', connection) #create result_muni as the sql target dataset
-result_muni.head()
 
-#apply SQL in python
-select * from result_muni
-group by 1
-order by 1 desc;
-quit;
-
+#by department
+result_depar_ = pd.read_sql('select Liste, depar, sum(Voix) as total_vote from output02 where (Code_du_depar,Liste) = (1,"LEXG")', connection)
+result_depar_.head()
 
 
 
