@@ -25,7 +25,7 @@ turnout.head()
 top = turnout.sort_values(by = "percent", ascending = False)
 top.head(15) 
        
-#################################### 2. by municipality
+#################################### 2. by department
 # dataset could be found in https://www.data.gouv.fr/en/datasets/elections-europeennes-2014-resultats-par-communes/
 surl02 = "https://www.data.gouv.fr/en/datasets/r/d6817473-7c6b-4a41-955c-b620c86e7fd7"
 data02 = urllib.request.urlopen(surl02)
