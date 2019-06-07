@@ -84,13 +84,59 @@ output02.to_csv('output02.csv') #save the file
 
 #store dataframe into the database
 connection = sqlite3.connect("output02.db")#create the database
+c = connection.cursor()
 output02.to_sql('output02', connection, if_exists='replace', index=False) #connect the dataframe with the database
 
-#by department
-result_depar_ = pd.read_sql('select Liste, depar, sum(Voix) as total_vote from output02 where (Code_du_depar,Liste) = (1,"LEXG")', connection)
-result_depar_.head()
+#seperate the table to 31 tables
+result0 = pd.read_sql('select Code_du_depar, depar, Liste, sum(Voix) as total_vote from output02 group by 1,2', connection)
+result1 = pd.read_sql('select Code_du_depar, depar, Liste1 as Liste, sum(Voix1) as total_vote from output02 group by 1,2', connection)
+result2 = pd.read_sql('select Code_du_depar, depar, Liste2 as Liste,sum(Voix2) as total_vote from output02 group by 1,2', connection)
+result3 = pd.read_sql('select Code_du_depar, depar, Liste3 as Liste,sum(Voix3) as total_vote from output02 group by 1,2', connection)
+result4 = pd.read_sql('select Code_du_depar, depar, Liste4 as Liste,sum(Voix4) as total_vote from output02 group by 1,2', connection)
+result5 = pd.read_sql('select Code_du_depar, depar, Liste5 as Liste, sum(Voix5) as total_vote from output02 group by 1,2', connection)
+result6 = pd.read_sql('select Code_du_depar, depar, Liste6 as Liste, sum(Voix6) as total_vote from output02 group by 1,2', connection)
+result7 = pd.read_sql('select Code_du_depar, depar, Liste7 as Liste, sum(Voix7) as total_vote from output02 group by 1,2', connection)
+result8 = pd.read_sql('select Code_du_depar, depar, Liste8 as Liste, sum(Voix8) as total_vote from output02 group by 1,2', connection)
+result9 = pd.read_sql('select Code_du_depar, depar, Liste9 as Liste, sum(Voix9) as total_vote from output02 group by 1,2', connection)
+result10 = pd.read_sql('select Code_du_depar, depar, Liste10 as Liste,sum(Voix10) as total_vote from output02 group by 1,2', connection)
+result11 = pd.read_sql('select Code_du_depar, depar, Liste11 as Liste, sum(Voix11) as total_vote from output02 group by 1,2', connection)
+result12 = pd.read_sql('select Code_du_depar, depar, Liste12 as Liste, sum(Voix12) as total_vote from output02 group by 1,2', connection)
+result13 = pd.read_sql('select Code_du_depar, depar, Liste13 as Liste, sum(Voix13) as total_vote from output02 group by 1,2', connection)
+result14 = pd.read_sql('select Code_du_depar, depar, Liste14 as Liste, sum(Voix14) as total_vote from output02 group by 1,2', connection)
+result15 = pd.read_sql('select Code_du_depar, depar, Liste15 as Liste, sum(Voix15) as total_vote from output02 group by 1,2', connection)
+result16 = pd.read_sql('select Code_du_depar, depar, Liste16 as Liste, sum(Voix16) as total_vote from output02 group by 1,2', connection)
+result17 = pd.read_sql('select Code_du_depar, depar, Liste17 as Liste, sum(Voix17) as total_vote from output02 group by 1,2', connection)
+result18 = pd.read_sql('select Code_du_depar, depar, Liste18 as Liste, sum(Voix18) as total_vote from output02 group by 1,2', connection)
+result19 = pd.read_sql('select Code_du_depar, depar, Liste19 as Liste, sum(Voix19) as total_vote from output02 group by 1,2', connection)
+result20= pd.read_sql('select Code_du_depar, depar, Liste20 as Liste, sum(Voix20) as total_vote from output02 group by 1,2', connection)
+result21= pd.read_sql('select Code_du_depar, depar, Liste21 as Liste,sum(Voix21) as total_vote from output02 group by 1,2', connection)
+result22 = pd.read_sql('select Code_du_depar, depar,Liste22 as Liste, sum(Voix22) as total_vote from output02 group by 1,2', connection)
+result24 = pd.read_sql('select Code_du_depar, depar, Liste23 as Liste, sum(Voix23) as total_vote from output02 group by 1,2', connection)
+result25= pd.read_sql('select Code_du_depar, depar, Liste24 as Liste, sum(Voix24) as total_vote from output02 group by 1,2', connection)
+result23 = pd.read_sql('select Code_du_depar, depar, Liste25 as Liste, sum(Voix25) as total_vote from output02 group by 1,2', connection)
+result26 = pd.read_sql('select Code_du_depar, depar, Liste26 as Liste, sum(Voix26) as total_vote from output02 group by 1,2', connection)
+result27= pd.read_sql('select Code_du_depar, depar, Liste27 as Liste, sum(Voix27) as total_vote from output02 group by 1,2', connection)
+result28= pd.read_sql('select Code_du_depar, depar, Liste28 as Liste, sum(Voix28) as total_vote from output02 group by 1,2', connection)
+result29 = pd.read_sql('select Code_du_depar, depar, Liste29 as Liste, sum(Voix29) as total_vote from output02 group by 1,2', connection)
+result30 = pd.read_sql('select Code_du_depar, depar, Liste30 as Liste, sum(Voix30) as total_vote from output02 group by 1,2', connection)
 
+#make a big basetable for finding the result by department
+deparesult = result0.append(result1).append(result3).append(result4).append(result5).append(result6).\
+        append(result7).append(result8).append(result9).append(result10).append(result11).\
+        append(result12).append(result13).append(result14).append(result15).append(result16).\
+        append(result17).append(result18).append(result19).append(result20).append(result21).\
+        append(result22).append(result23).append(result24).append(result25).append(result26).\
+        append(result27).append(result28).append(result29).append(result30)
 
+deparesult.to_csv(os.path.join(path,r'deparesult.csv'))# keep a csv file incase of any other use
+
+#cus there r some databaseerror in the col total_vote, so here we create new database for basetables
+con = sqlite3.connect("deparesult.db")
+deparesult.to_sql('deparesult', connection, if_exists='replace', index=False) #connect the dataframe with the database
+deparesult2 = pd.read_sql('select depar, Liste, sum(total_vote) as vote_depar from deparesult group by 1,2 having depar != 0 and Liste != 0', connection)
+
+#at last export the result as excel
+deparesult2.to_excel(r'C:\Users\yliu11\Desktop\an_internship\result_by_departement.xlsx')
 
 
 
