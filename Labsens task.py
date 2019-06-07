@@ -34,7 +34,7 @@ output02 = output.parse(output.sheet_names[0], header=0) #use the 1st sheet
 
 # turn nan to 0, because it means no one vote for this party
 output02 = output02.fillna(0)
-# only keep cols we need
+# only keep cols that we need
 list(output02) #check the colnames
 output02 = output02[['Code du département','Libellé du département','Code de la commune','Libellé de la commune','Exprimés',
                      'Nuance Liste','Voix','Nuance Liste.1','Voix.1','Nuance Liste.2','Voix.2','Nuance Liste.3','Voix.3','Nuance Liste.4','Voix.4',
