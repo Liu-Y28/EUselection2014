@@ -137,29 +137,3 @@ deparesult2 = pd.read_sql('select depar, Liste, sum(total_vote) as vote_depar fr
 
 #at last export the result as excel
 deparesult2.to_excel(r'C:\Users\yliu11\Desktop\an_internship\result_by_departement.xlsx')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
